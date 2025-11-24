@@ -15,11 +15,50 @@ def lire_sac(fichier: str) -> Sac_a_dos:
             valeur, poids = map(int, f.readline().split())
             sac.poids[i] = poids
             sac.valeurs[i] = valeur
-        print(sac.poids)
-        print(sac.valeurs)
+        print("---------------------SAC A DOS CREER---------------------")
+        print("poids : " + str(sac.poids))
+        print("valeurs : " + str(sac.valeurs))
             
     return sac
 
-lire_sac("sad_4.txt")
+def glouton(sad:Sac_a_dos): 
+
+    ratio = [sad.valeurs[i] / sad.poids[i] for i in range(len(sad.poids))]      
+    res = [] 
+    
+    while sad.W > 0 and len(ratio) > 0:
+        max_index = ratio.index(max(ratio))    
+        if sad.W >= sad.poids[max_index]:
+            res.append(["poids", sad.poids[max_index], "valeur", sad.valeurs[max_index]])
+            sad.W -= sad.poids[max_index]  
+        ratio.pop(max_index)
+        sad.poids.pop(max_index)
+        sad.valeurs.pop(max_index)
+    
+    print("---------------------METHODE GLOUTON---------------------")
+    print("Resultat : " + str(res))
+    poid_totale = sum(poid[1] for poid in res)
+    valeur_totale = sum(val[3] for val in res)
+    print("Poid totale :", poid_totale)
+    print("Valeur totale :", valeur_totale)
+    return res
+
+def dynamique(sad:Sac_a_dos):
+    tab = [[0]* sad.W for i in range(sad.W-1)]
+
+    for w in range(1, len(tab[n])):
+        if w < sad.poids[n-1]:
 
 
+    print("---------------------METHODE DYNAMIQUE---------------------")
+    for ligne in res2d:
+        print(ligne)
+
+    return res2d
+
+
+
+
+sac4 = lire_sac("sad_4.txt")
+#glouton(sac4)
+dynamique(sac4)
